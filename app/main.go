@@ -64,7 +64,7 @@ func main() {
 	r.HandleFunc("/notes", DeleteNote).Methods("DELETE")
 
 	// Start the server
-	port := 8795
+	port := 80
 	fmt.Printf("Server is running on port %d...\n", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), r))
 }
