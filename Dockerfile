@@ -1,17 +1,16 @@
 FROM golang:1.19
-WORKDIR /
-EXPOSE 8080
+WORKDIR /app
+EXPOSE 8081
 RUN git clone https://github.com/nitesh-repos/AccuKnox.git
 
-# RUN cd /AccuKnox/app
-# RUN go mod init accu_knox
-# RUN go mod tidy
-# RUN go build -o main main.go
-# CMD main
-CMD while true; do sleep 1; done
+RUN mv AccuKnox/rest_api rest_api
+RUN rm -rf AccuKnox
+RUN cd rest_api
+RUN go mod init rest_api
+RUN go mod tidy
+RUN go build -o main main.go
+CMD ./main
 
-
-# docker build -t notes_api_img .
-# docker run -itd --name notes_api -p8080:80 notes_api_img
-# docker exec -it notes_api sh
-
+# CMD while true; do sleep 1; done
+# docker build -t notes_api_img .; docker run -itd --name notes_api -p8081:80 notes_api_img; docker exec -it notes_api sh
+# docker commit notes_api_cont
